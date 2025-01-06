@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\admin\LoginController as AdminLoginController;
+use App\Http\Controllers\brandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
@@ -51,4 +52,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
+    
+
+    // Route for brand
+    Route::get('/brand', [brandController::class, 'index'])->name('brand.index');
+    Route::get('/brand/create', [brandController::class, 'create'])->name('brand.create');
+    Route::post('/brand/store', [brandController::class, 'store'])->name('brand.store');
+    Route::get('/brand/{brand}/edit', [brandController::class, 'edit'])->name('brand.edit');
+    Route::put('/brand/{brand}', [brandController::class, 'update'])->name('brand.update');
+    Route::delete('/brand/{brand}', [brandController::class, 'destroy'])->name('brand.destroy');
 });
+
