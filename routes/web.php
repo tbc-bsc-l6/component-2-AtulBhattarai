@@ -6,6 +6,7 @@ use App\Http\Controllers\brandController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -61,5 +62,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/brand/{brand}/edit', [brandController::class, 'edit'])->name('brand.edit');
     Route::put('/brand/{brand}', [brandController::class, 'update'])->name('brand.update');
     Route::delete('/brand/{brand}', [brandController::class, 'destroy'])->name('brand.destroy');
+
+    // Route for product
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('/product/create', [ProductController::class, 'create'])->name('product.create');
+    Route::post('/product/store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/{product}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/{product}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product/{product}', [ProductController::class, 'destroy'])->name('product.destroy');
+
 });
 
