@@ -1,95 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://unpkg.com/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Register Page</title>
 </head>
 
-<body class="bg-light">
-    <section class=" p-3 p-md-4 p-xl-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12 col-md-9 col-lg-7 col-xl-6 col-xxl-5">
-                    <div class="card border border-light-subtle rounded-4">
-                        <div class="card-body p-3 p-md-4 p-xl-5">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="mb-5">
-                                        <h4 class="text-center">Register Here</h4>
-                                    </div>
-                                </div>
-                            </div>
-                            <form action="{{ route('account.processRegister') }}" method="POST">
-                                @csrf
-                                <div class="row gy-3 overflow-hidden">
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="text" value="{{ old('name') }}"
-                                                class="form-control @error('name') is-invalid @enderror" name="name"
-                                                id="name" placeholder="Your Name">
-                                            <label for="name" class="form-label">Name</label>
-                                            @error('name')
-                                                <p class="invalid-feedback">{{ $message }} </p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="email" value="{{ old('email') }}"
-                                            class="form-control @error('email') is-invalid @enderror" name="email" id="email"
-                                                placeholder="name@example.com">
-                                            <label for="email" class="form-label">Email</label>
-                                            @error('email')
-                                                <p class="invalid-feedback">{{ $message }} </p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="password"
-                                                class="form-control @error('password') is-invalid @enderror"
-                                                name="password" id="password" value="" placeholder="Password">
-                                            <label for="password" class="form-label">Password</label>
-                                            @error('password')
-                                                <p class="invalid-feedback">{{ $message }} </p>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="form-floating mb-3">
-                                            <input type="password" class="form-control" name="password_confirmation"
-                                                id="confirm_password" value="" placeholder="Confirm Password">
-                                            <label for="password" class="form-label">Confirm Password</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div class="d-grid">
-                                            <button class="btn bsb-btn-xl btn-primary py-3" type="submit">Register
-                                                Now</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="row">
-                                <div class="col-12">
-                                    <hr class="mt-5 mb-4 border-secondary-subtle">
-                                    <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-center">
-                                        <a href="{{ route('account.login') }}" class="link-secondary text-decoration-none">Click here to
-                                            login</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+<body class="relative min-h-screen flex items-center justify-center bg-gray-100">
+    <!-- Background Image -->
+    <div class="absolute inset-0">
+        <img src="{{ asset('Medicine_Background2.jpg') }}" 
+             alt="Background Image" 
+             class="w-full h-full object-cover filter blur-sm">
+    </div>
+    <!-- Overlay -->
+    <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+
+    <!-- Registration Card -->
+    <div class="relative z-10 max-w-lg w-full bg-white shadow-xl rounded-lg p-8">
+        <!-- Decorative Elements -->
+        <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-300 rounded-full blur-3xl opacity-50"></div>
+        <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-pink-300 rounded-full blur-3xl opacity-50"></div>
+
+        <!-- Form Content -->
+        <div class="relative z-20">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Register Here</h2>
+            <p class="text-center text-gray-500 mb-1">Fill in your details to create an account</p>
+            <p class="text-center text-red-500 mb-6">Please take your time</p>
+
+            <form action="{{ route('account.processRegister') }}" method="POST" class="space-y-4">
+                @csrf
+
+                <!-- Name Field -->
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-600">Name</label>
+                    <input type="text" name="name" id="name" value="{{ old('name') }}"
+                        class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none @error('name') border-red-500 @enderror"
+                        placeholder="Your Name">
+                    @error('name')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
+
+                <!-- Email Field -->
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-600">Email</label>
+                    <input type="email" name="email" id="email" value="{{ old('email') }}"
+                        class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none @error('email') border-red-500 @enderror"
+                        placeholder="name@example.com">
+                    @error('email')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Password Field -->
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-600">Password</label>
+                    <input type="password" name="password" id="password"
+                        class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none @error('password') border-red-500 @enderror"
+                        placeholder="Password">
+                    @error('password')
+                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <!-- Confirm Password Field -->
+                <div>
+                    <label for="confirm_password" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+                    <input type="password" name="password_confirmation" id="confirm_password"
+                        class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
+                        placeholder="Confirm Password">
+                </div>
+
+                <!-- Submit Button -->
+                <div>
+                    <button type="submit"
+                        class="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-semibold rounded-lg shadow-lg hover:opacity-90 transition duration-300">
+                        Register Now
+                    </button>
+                </div>
+            </form>
+
+            <!-- Footer Links -->
+            <div class="mt-6">
+                <hr class="border-gray-300">
+                <p class="text-center text-gray-500 mt-4">
+                    Already have an account? <a href="{{ route('account.login') }}" class="text-blue-500 hover:underline">Login here</a>
+                </p>
             </div>
         </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
-    </script>
+    </div>
 </body>
 
 </html>

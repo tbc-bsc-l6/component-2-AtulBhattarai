@@ -1,32 +1,53 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
-    <div class="feature">
-        <div class="container my-5">
-            <h5>Featured</h5>
-            <div class="row mt-4">
-                @if ($featured_medicine->isNotEmpty())
-                @foreach ($featured_medicine as $shoe)
-                    <div class="col-md-3 mb-4">
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ asset('product/' . $shoe->img) }}" class="card-img-top"
-                                alt="{{ $shoe->title }}" style="height: 350px;">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ $shoe->title }}</h5>
-                                <p class="card-text">{{ Str::limit($shoe->description, 100) }}</p>
-                                <p><strong>Brand:</strong> {{ $shoe->brand->name }}</p>
-                                <p><strong>Category:</strong> {{ $shoe->category->name }}</p>
-                                <p><strong>Price:</strong> ${{ $shoe->price }}</p>
-                                <p><strong>Published on:</strong> {{ $shoe->published_at }}</p>
-                                <!-- <a href="{{ route('shoe.show', $shoe->id) }}" class="btn btn-info w-100">View</a> -->
-                            </div>
-                        </div>
+<div class="container mx-auto px-4">
+    <!-- Featured Medicines Section -->
+    <div class="feature my-10">
+        <h2 class="text-2xl font-semibold text-blue-700 mb-6">Featured Medicines</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @if ($featured_medicine->isNotEmpty())
+                @foreach ($featured_medicine as $medicine)
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transform transition-transform duration-300 hover:scale-105">
+                    <img src="{{ asset('product/' . $medicine->img) }}" alt="{{ $medicine->title }}" class="h-48 w-full object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900">{{ $medicine->title }}</h3>
+                        <p class="text-gray-600 text-sm mt-2">{{ Str::limit($medicine->description, 100) }}</p>
+                        <p class="text-gray-800 text-sm mt-2"><strong>Brand:</strong> {{ $medicine->brand->name }}</p>
+                        <p class="text-gray-800 text-sm"><strong>Category:</strong> {{ $medicine->category->name }}</p>
+                        <p class="text-gray-800 text-sm"><strong>Price:</strong> ${{ $medicine->price }}</p>
+                        <p class="text-gray-500 text-sm"><strong>Published on:</strong> {{ $medicine->published_at }}</p>
+                        <a href="{{ route('medicine.show', $medicine->id) }}" class="block mt-4 bg-green-500 text-white text-center py-2 rounded-md hover:bg-green-600">View</a>
                     </div>
+                </div>
                 @endforeach
-                @endif
+            @else
+                <p class="col-span-4 text-gray-500">No featured medicines available.</p>
+            @endif
+        </div>
+    </div>
 
-
-            </div>
+    <!-- Latest Medicines Section -->
+    <div class="feature my-10">
+        <h2 class="text-2xl font-semibold text-blue-700 mb-6">Latest Medicines</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            @if ($latest_medicine->isNotEmpty())
+                @foreach ($latest_medicine as $medicine)
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transform transition-transform duration-300 hover:scale-105">
+                    <img src="{{ asset('product/' . $medicine->img) }}" alt="{{ $medicine->title }}" class="h-48 w-full object-cover">
+                    <div class="p-4">
+                        <h3 class="text-lg font-semibold text-gray-900">{{ $medicine->title }}</h3>
+                        <p class="text-gray-600 text-sm mt-2">{{ Str::limit($medicine->description, 100) }}</p>
+                        <p class="text-gray-800 text-sm mt-2"><strong>Brand:</strong> {{ $medicine->brand->name }}</p>
+                        <p class="text-gray-800 text-sm"><strong>Category:</strong> {{ $medicine->category->name }}</p>
+                        <p class="text-gray-800 text-sm"><strong>Price:</strong> ${{ $medicine->price }}</p>
+                        <p class="text-gray-500 text-sm"><strong>Published on:</strong> {{ $medicine->published_at }}</p>
+                        <a href="{{ route('medicine.show', $medicine->id) }}" class="block mt-4 bg-green-500 text-white text-center py-2 rounded-md hover:bg-green-600">View</a>
+                    </div>
+                </div>
+                @endforeach
+            @else
+                <p class="col-span-4 text-gray-500">No latest medicines available.</p>
+            @endif
         </div>
     </div>
 </div>

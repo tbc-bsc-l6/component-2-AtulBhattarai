@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/', [MedicineController::class, 'index'])->name('home');
+Route::get('/medproduct/{id}', [MedicineController::class, 'show'])->name('medicine.show');
+
+
 
 Route::group(['prefix' => 'account'], function () {
 

@@ -10,7 +10,7 @@ class MedicineController extends Controller
     public function index()
     {
         $latest_medicine = Product::with(['brand', 'category'])
-            ->where('featured', true)
+            ->where('featured', false)
             ->where('status', 'active')
             ->orderBy('published_at', 'desc')
             ->limit(4) // Fetch the latest 4 products
@@ -24,5 +24,12 @@ class MedicineController extends Controller
             ->get();
 
         return view('welcome', compact('latest_medicine', 'featured_medicine'));
+    }
+    public function show($id)
+    {
+        // Fetch the product by ID along with its category and author using eager loading
+        $product = Product::with(['category', 'brand'])->findOrFail($id);
+
+        return view('medproduct', compact('product'));
     }
 }

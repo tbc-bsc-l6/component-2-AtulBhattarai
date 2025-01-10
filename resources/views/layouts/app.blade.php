@@ -1,61 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <title>Flexon Nepal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <a class="navbar-brand" href="/">Flexon Nepal</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse mx-auto" id="navbarNav">
-                <div class="mx-auto"></div>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
-                    </li>
+<body class="bg-gray-50">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50 px-10">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between py-4">
+                <!-- Logo -->
+                <a href="/" class="text-xl font-bold text-gray-800 flex items-center">
+                    <img src="{{ asset('Flexon_Logo.png') }}" alt="Logo" class="h-10 w-10 mr-2 rounded-full">
+                    Flexon Nepal
+                </a>
+                <!-- Menu -->
+                <div class="hidden md:flex space-x-6">
+                    <a href="/" class="text-gray-600 hover:text-blue-500 font-medium">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Features</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Pricing</a>
                     @if (Auth::check())
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('account.logout')}}">logout</a>
-                        </li>
+                        <a href="{{ route('account.logout') }}" class="text-gray-600 hover:text-blue-500 font-medium">Logout</a>
                     @else
-                        <li class="nav-item">
-                        <a class="nav-link" href="{{ route('account.login')}}">login</a>
-                        </li>
+                        <a href="{{ route('account.login') }}" class="text-gray-600 hover:text-blue-500 font-medium">Login</a>
                     @endif
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route('account.register')}}">Register</a>
-                    </li>
-                </ul>
+                    <a href="{{ route('account.register') }}" class="text-gray-600 hover:text-blue-500 font-medium">Register</a>
+                </div>
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-gray-600 focus:outline-none" id="mobile-menu-button">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div class="hidden md:hidden" id="mobile-menu">
+                <div class="flex flex-col space-y-4 mt-2">
+                    <a href="/" class="text-gray-600 hover:text-blue-500 font-medium">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Features</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Pricing</a>
+                    @if (Auth::check())
+                        <a href="{{ route('account.logout') }}" class="text-gray-600 hover:text-blue-500 font-medium">Logout</a>
+                    @else
+                        <a href="{{ route('account.login') }}" class="text-gray-600 hover:text-blue-500 font-medium">Login</a>
+                    @endif
+                    <a href="{{ route('account.register') }}" class="text-gray-600 hover:text-blue-500 font-medium">Register</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    @yield('content')
-
-    <div class="footer bg-dark text-white py-5">
-
-        <p class="text-center ">©2025 Flexon Nepal. All right reserved.</p>
+    <!-- Main Content -->
+    <div class="container mx-auto py-10">
+        @yield('content')
     </div>
 
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <p class="text-center">©2025 Flexon Nepal. All rights reserved.</p>
+    </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <!-- Script for Mobile Menu -->
+    <script>
+        const mobileMenuButton = document.getElementById("mobile-menu-button");
+        const mobileMenu = document.getElementById("mobile-menu");
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
     </script>
 </body>
 
