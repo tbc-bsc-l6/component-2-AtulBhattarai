@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MedicineController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSearchController;
 use Illuminate\Support\Facades\Route;
@@ -84,5 +85,7 @@ Route::group(['prefix' => 'account'], function () {
         Route::put('/cart/{id}', [CartController::class, 'updatecardproducts'])->name('cartupdate');
         Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cartdestroy');
     
+        Route::post('/checkout', [OrderController::class, 'checkout'])->name('cartcheckout');
+
     });
 });

@@ -5,94 +5,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'E-Books')</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Sidebar Styles */
+        .sidebar {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1030;
+            background-color: #343a40;
+            color: white;
+            width: 250px;
+            padding-top: 50px;
+        }
+
+        .sidebar .nav-link {
+            color: white;
+        }
+
+        .sidebar .nav-link:hover {
+            background-color: #575757;
+        }
+
+
+        .sidebar .nav-item {
+            margin-bottom: 15px;
+        }
+
+        .content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        /* Adjusts the body content for small screens */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+            }
+
+            .content {
+                margin-left: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container">
-            <!-- Navbar Brand -->
-            <a class="navbar-brand" href="#">EMeds</a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2 class="text-center text-white">EMeds</h2>
+        <ul class="nav flex-column px-3">
+            <li class="nav-item">
+                <a class="nav-link active" href="{{route('admin.dashboard')}}">Admin Dashboard</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('category.index')}}">Category</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('brand.index')}}">Brands</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('product.index')}}">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('profile.edit')}}">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" aria-disabled="true">Disabled</a>
+            </li>
+        </ul>
+    </div>
 
-            <!-- Navbar Toggler -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <!-- Main Content Area -->
+    <div class="content">
+        <!-- Offcanvas Toggler for smaller screens -->
+        <button class="btn btn-primary d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+            </svg>
+        </button>
 
-            <!-- Collapsible Navbar -->
-            <div class="collapse navbar-collapse mx-auto" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route("admin.dashboard")}}">Admin Dashboad</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route("category.index")}}">Category</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route("brand.index")}}">Brands</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route("product.index")}}">Products</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{route("profile.edit")}}">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                    </li>
-                </ul>
+        <main class="container">
+            @yield('content')
+        </main>
+    </div>
 
-                <!-- Offcanvas Toggler -->
-                <button class="navbar-toggler border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
-                        <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Offcanvas Navbar -->
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-end flex-grow-1">
-                        <!-- Dropdown Menu -->
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#!" id="accountDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                @if (Auth::guard('admin')->check())
-                                Hello, {{ Auth::guard('admin')->user()->name }}
-                                @else
-                                Hello, Admin
-                                @endif
-                            </a>
-                            <ul class="dropdown-menu border-0 shadow bsb-zoomIn" aria-labelledby="accountDropdown">
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('admin.logout') }}">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <!-- Offcanvas Sidebar for Small Screens -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-    </nav>
-
-    <div class="container-fluid">
-        <div class="row">
-
-
-
-            <!-- Main Content -->
-            <main class="col-md-12 ms-sm-auto col-lg-12 px-md-4">
-                @yield('content')
-            </main>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('admin.dashboard')}}">Admin Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('category.index')}}">Category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('brand.index')}}">Brands</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('product.index')}}">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('profile.edit')}}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 
 </html>
