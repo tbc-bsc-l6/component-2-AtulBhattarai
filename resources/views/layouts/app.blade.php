@@ -30,7 +30,7 @@
 
                         <a href="{{ route('cartproducts') }}" class="text-gray-600 hover:text-blue-500 font-medium">View Cart</a>
                         <a href="{{ route('order.view') }}" class="text-gray-600 hover:text-blue-500 font-medium">View Order</a>
-                        <a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-blue-500 font-medium">Change Password</a>
+                        <a href="{{ route('userprofile.edit') }}" class="text-gray-600 hover:text-blue-500 font-medium">Change Password</a>
                         <a href="{{ route('account.logout') }}" class="text-gray-600 hover:text-blue-500 font-medium">Logout</a>
                     @else
                         <a href="{{ route('account.login') }}" class="text-gray-600 hover:text-blue-500 font-medium">Login</a>

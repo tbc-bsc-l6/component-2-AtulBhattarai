@@ -46,8 +46,8 @@
                         <p><strong>Brand:</strong> {{ $product->brand->name }}</p>
                         <p><strong>Category:</strong> {{ $product->category->name }}</p>
                         <p><strong>Price:</strong> ${{ $product->price }}</p>
-                        <a href="{{ route('medicine.show', $product->id) }}" class="btn btn-info w-100">View Medicine</a>
-                        {{-- <a href="{{ route('addtocart', $product->id) }}" class="btn btn-primary w-100 mt-3">Add to cart</a> --}}
+                        <a href="{{ route('medicine.show', $product->id) }}" class="btn btn-info w-100 mt-2">View Medicine</a>
+                        <a href="{{ route('addtocart', $product->id) }}" class="btn btn-primary w-100 mt-2">Add to cart</a>
                     </div>
                 </div>
             </div>
