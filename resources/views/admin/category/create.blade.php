@@ -9,8 +9,12 @@
                 <div class="card border-0 shadow-lg rounded-4" style="background: linear-gradient(135deg, #f9f9f9, #e0e0e0);">
                     <div class="card-header bg-transparent border-bottom-0">
                         <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="text-primary">Create Category</h4>
-                            <a href="{{ route('category.index') }}" class="btn btn-outline-primary btn-sm">Back</a>
+                            <h4 class="text-primary">
+                                <i class="fas fa-tag me-2"></i> Create Category
+                            </h4>
+                            <a href="{{ route('category.index') }}" class="btn btn-outline-primary btn-sm">
+                                <i class="fas fa-arrow-left me-1"></i> Back
+                            </a>
                         </div>
                     </div>
                     <div class="card-body">
@@ -40,7 +44,9 @@
                                 </div>
                             </div>
                             <div class="d-grid gap-2">
-                                <button type="submit" class="btn btn-primary btn-lg">Create Category</button>
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-plus-circle me-2"></i> Create Category
+                                </button>
                             </div>
                         </form>
                     </div>
