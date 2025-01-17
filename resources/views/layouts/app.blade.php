@@ -25,14 +25,19 @@
                 <!-- Menu -->
                 <div class="hidden md:flex space-x-6">
                     <a href="/" class="text-gray-600 hover:text-blue-500 font-medium">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Features</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Pricing</a>
+                    <a href="/allMedicines" class="text-gray-600 hover:text-blue-500 font-medium">Medicines</a>
                     @if (Auth::check())
+
+                        <a href="{{ route('cartproducts') }}" class="text-gray-600 hover:text-blue-500 font-medium">View Cart</a>
+                        <a href="{{ route('order.view') }}" class="text-gray-600 hover:text-blue-500 font-medium">View Order</a>
+                        <a href="{{ route('profile.edit') }}" class="text-gray-600 hover:text-blue-500 font-medium">Change Password</a>
                         <a href="{{ route('account.logout') }}" class="text-gray-600 hover:text-blue-500 font-medium">Logout</a>
                     @else
                         <a href="{{ route('account.login') }}" class="text-gray-600 hover:text-blue-500 font-medium">Login</a>
+                        <a href="{{ route('account.register') }}" class="text-gray-600 hover:text-blue-500 font-medium">Register</a>
                     @endif
-                    <a href="{{ route('account.register') }}" class="text-gray-600 hover:text-blue-500 font-medium">Register</a>
+                    
+
                 </div>
                 <!-- Mobile Menu Button -->
                 <button class="md:hidden text-gray-600 focus:outline-none" id="mobile-menu-button">

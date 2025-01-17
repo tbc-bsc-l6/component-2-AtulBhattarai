@@ -30,7 +30,6 @@
                             <th>Price</th>
                             <th>Featured</th>
                             <th>Status</th>
-                            <th>Published At</th>
                             <th>Action</th>
                         </tr>
                     </thead>

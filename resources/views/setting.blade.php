@@ -1,4 +1,4 @@
-@extends('admin.layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Flexon - Dashboard')
 
@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
 
-                    <form action="{{ route('profile.update') }}" method="POST">
+                    <form action="{{ route('userprofile.update') }}" method="POST">
                         @csrf
                         @method('PUT')
 

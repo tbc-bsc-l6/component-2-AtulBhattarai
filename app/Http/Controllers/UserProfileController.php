@@ -8,19 +8,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class AdminProfileController extends Controller
+class UserProfileController extends Controller
 {
-    // Display the profile edit form
     public function edit()
     {
-        $user = Auth::guard('admin')->user();  // Get the authenticated user
+        $user = Auth::user();  // Get the authenticated user
         // Check if the user is authenticated
-        return view('admin.setting', compact('user'));
+        return view('setting', compact('user'));
     }
-
     public function update(Request $request)
     {
-        $user = User::findOrFail(Auth::guard('admin')->user()->id);
+        $user = User::findOrFail(Auth::user()->id);
 
         // Validation rules
         $rules = [
@@ -33,7 +31,7 @@ class AdminProfileController extends Controller
 
         if ($validator->fails()) {
             return redirect()
-                ->route('profile.edit', $user->id)
+                ->route('userprofile.edit', $user->id)
                 ->withInput()
                 ->withErrors($validator);
         }
@@ -41,7 +39,7 @@ class AdminProfileController extends Controller
         // Verify the current password
         if (!Hash::check($request->current_password, $user->password)) {
             return redirect()
-                ->route('profile.edit', $user->id)
+                ->route('userprofile.edit', $user->id)
                 ->withErrors(['current_password' => 'The current password is incorrect.'])
                 ->withInput();
         }
@@ -51,7 +49,7 @@ class AdminProfileController extends Controller
         $user->save();
 
         return redirect()
-            ->route('admin.dashboard')
+            ->route('home')
             ->with('success', 'Password updated successfully.');
     }
 }

@@ -74,7 +74,10 @@
                 <a class="nav-link" href="{{route('profile.edit')}}">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link disabled" href="#" aria-disabled="true">Disabled</a>
+                <a class="nav-link" href="{{route('vieworders')}}">View Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('admin.logout')}}">Logout</a>
             </li>
         </ul>
     </div>

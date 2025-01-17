@@ -17,7 +17,7 @@
                 <h4><strong>Brand:</strong> {{ $product->brand->name }}</h4>
                 <p><Strong>Bio:</Strong><br>
                     {{ $product->brand->description }}</p>
-                <p>Publish on {{ $product->published_at }}</p>
+
                 <h5>Price: {{ $product->price }}</h5>
                 
             </div>

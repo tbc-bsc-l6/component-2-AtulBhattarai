@@ -11,6 +11,7 @@ use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSearchController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -57,11 +58,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin.guest'], function () {
         Route::get('login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
+    });
+
+    Route::get('/order', [OrderController::class, 'viewOrders'])->name('vieworders');
 
     // Route for profile update
     Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
     Route::put('profile/update', [AdminProfileController::class, 'update'])->name('profile.update');
-    });
+    
 });
 
 Route::group(['prefix' => 'account'], function () {
@@ -86,6 +90,13 @@ Route::group(['prefix' => 'account'], function () {
         Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cartdestroy');
     
         Route::post('/checkout', [OrderController::class, 'checkout'])->name('cartcheckout');
+
+        Route::get('/order', [OrderController::class, 'UserOrders'])->name('order.view');
+
+        Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('userprofile.edit');
+        Route::put('profile/update', [UserProfileController::class, 'update'])->name('userprofile.update');
+
+
 
     });
 });

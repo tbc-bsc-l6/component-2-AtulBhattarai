@@ -23,7 +23,6 @@ class OrderController extends Controller
                 'user_id' => $userId,
                 'product_id' => $cart->product_id,
                 'qty' => $cart->qty,
-                'status' => 'pending',
             ]);
 
         }
@@ -33,4 +32,21 @@ class OrderController extends Controller
         // Redirect with success message
         return redirect()->route('cartproducts')->with('success', 'Your order has been placed successfully!');
     }
+        public function viewOrders()
+        {
+            $orders = Order::with(['product', 'user'])->paginate(10);
+    
+            return view('admin.order.list', compact('orders'));
+        }
+
+        public function UserOrders()
+        {
+            $userId = Auth::id(); // Get the authenticated user ID
+            $orders = Order::where('user_id', $userId) // Get orders for the authenticated user
+                ->with('product') // Load product details
+                ->paginate(5); // Paginate the results
+    
+            return view('order', compact('orders')); // Pass orders to the view
+        }
+        
 }

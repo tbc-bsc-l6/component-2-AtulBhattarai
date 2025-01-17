@@ -15,7 +15,6 @@
                         <p class="text-gray-800 text-sm mt-2"><strong>Brand:</strong> {{ $medicine->brand->name }}</p>
                         <p class="text-gray-800 text-sm"><strong>Category:</strong> {{ $medicine->category->name }}</p>
                         <p class="text-gray-800 text-sm"><strong>Price:</strong> ${{ $medicine->price }}</p>
-                        <p class="text-gray-500 text-sm"><strong>Published on:</strong> {{ $medicine->published_at }}</p>
                         <a href="{{ route('medicine.show', $medicine->id) }}" class="block mt-4 bg-green-500 text-white text-center py-2 rounded-md hover:bg-green-600">View</a>
                         <a href="{{ route('addtocart', $medicine->id) }}" class="block mt-4 bg-green-500 text-white text-center py-2 rounded-md hover:bg-green-600">Add to Cart</a>
                     </div>
