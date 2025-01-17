@@ -73,11 +73,6 @@
                     </button>
                 </div>
             </form>
-
-            <!-- Footer -->
-            <p class="text-center text-gray-500 mt-6">
-                Don't have an account? <a href="#" class="text-blue-500 hover:underline">Sign up</a>
-            </p>
         </div>
     </div>
 </body>
