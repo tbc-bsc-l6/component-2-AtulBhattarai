@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Login Page</title>
 </head>
@@ -83,6 +84,16 @@
                     Don't have an account? <a href="{{ route('account.register') }}" class="text-blue-500 hover:underline">Create one now</a>
                 </p>
             </div>
+
+            <!-- Footer Links -->
+            <div class="mt-6">
+                <p class="text-center text-gray-500 mt-4">
+                    <a href="{{ route('admin.login') }}" class="text-blue-500 hover:underline">
+                        <i class="fas fa-user-shield"></i> Login As Admin
+                    </a>
+                </p>
+            </div>
+            
         </div>
     </div>
 </body>
