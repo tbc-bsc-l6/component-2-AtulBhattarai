@@ -1,88 +1,103 @@
 @extends('layouts.app')
+
 @section('content')
-<div class="container">
-    <div class="card border-0 shadow my-5">
-        <div class="card-header bg-light">
-            <div class="row">
-                <div class="col-10">
-                    <h3 class="h5 pt-2">Products in Cart:</h3>
+<div class="container mx-auto px-4 py-8">
+    <div class="bg-white shadow-md rounded-lg">
+        <!-- Header Section -->
+        <div class="bg-gray-100 px-6 py-4 rounded-t-lg">
+            <h3 class="text-xl font-semibold text-indigo-700 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18M9 9h6M4 21h16a2 2 0 002-2V7a2 2 0 00-2-2H4a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Products in Cart
+            </h3>
+        </div>
+
+        <!-- Table Section -->
+        <div class="overflow-x-auto">
+            <table class="min-w-full table-auto">
+                <thead class="bg-gray-200">
+                    <tr>
+                        <th class="px-4 py-2 text-left text-gray-600">ID</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Image</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Product Name</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Qty</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Price</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Total Price</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Created At</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Updated At</th>
+                        <th class="px-4 py-2 text-left text-gray-600">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if ($carts->isNotEmpty())
+                        @foreach ($carts as $cart)
+                            <tr class="border-t hover:bg-gray-100">
+                                <td class="px-4 py-2">{{ $cart->id }}</td>
+                                <td class="px-4 py-2">
+                                    @if ($cart->product->img)
+                                        <img src="{{ asset('product/' . $cart->product->img) }}" alt="{{ $cart->product->title }}" class="h-16 w-16 object-cover rounded-md shadow-md">
+                                    @else
+                                        <span class="text-gray-500">No Image</span>
+                                    @endif
+                                </td>
+                                <td class="px-4 py-2 font-semibold text-gray-800">{{ $cart->product->title }}</td>
+                                <td class="px-4 py-2">
+                                    <form action="{{ route('cartupdate', $cart->id) }}" method="POST" class="flex items-center space-x-2">
+                                        @csrf
+                                        @method('PUT')
+                                        <input type="number" name="qty" value="{{ $cart->qty }}" min="1" max="{{ $cart->product->qty }}" class="w-16 text-center border border-gray-300 rounded-md shadow-sm">
+                                        <button type="submit" class="text-white bg-indigo-500 px-3 py-1 rounded-md hover:bg-indigo-600 transition">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                                            </svg>
+                                        </button>
+                                    </form>
+                                </td>
+                                <td class="px-4 py-2">${{ number_format($cart->product->price, 2) }}</td>
+                                <td class="px-4 py-2">${{ number_format($cart->qty * $cart->product->price, 2) }}</td>
+                                <td class="px-4 py-2">{{ \Carbon\Carbon::parse($cart->created_at)->format('d M, Y') }}</td>
+                                <td class="px-4 py-2">{{ \Carbon\Carbon::parse($cart->updated_at)->format('d M, Y') }}</td>
+                                <td class="px-4 py-2">
+                                    <button onclick="deleteCartItem({{ $cart->id }});" class="text-white bg-red-500 px-3 py-1 rounded-md hover:bg-red-600 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                    <form id="delete-cart-{{ $cart->id }}" action="{{ route('cartdestroy', $cart->id) }}" method="POST" style="display: none;">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="9" class="text-center py-4 text-gray-500">No Products found in the cart.</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Footer Section -->
+        @if ($carts->isNotEmpty())
+            <div class="p-6 border-t bg-gray-50">
+                <div class="flex justify-between items-center">
+                    <p class="text-lg font-semibold text-gray-700">Total Qty: {{ $totalQty }} | Total Price: ${{ number_format($totalPrice, 2) }}</p>
+                    <form action="{{ route('cartcheckout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="bg-green-500 text-white py-2 px-6 rounded-lg hover:bg-green-600 transition">
+                            Checkout
+                        </button>
+                    </form>
                 </div>
             </div>
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <tr>
-                    <th>ID</th>
-                    <th>Image</th>
-                    <th>Product Name</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Total Price</th>
-                    <th>Created At</th>
-                    <th>updated At</th>
-                    <th>Action</th>
-                </tr>
-                @if ($carts->isNotEmpty())
-                    @foreach ($carts as $cart)
-                        <tr>
-                            <td>{{ $cart->id }}</td>
-                            <td>
-                                @if ($cart->product->img)
-                                    <img src="{{ asset('product/' . $cart->product->img) }}"
-                                        alt="{{ $cart->product->title }}" class="img-thumbnail"
-                                        style="max-width: 100px;">
-                                @else
-                                    <span>No Image</span>
-                                @endif
-                            </td>
-                            <td>{{ $cart->product->title }}</td>
-                            <td>
-                                <!-- Editable qty field with a form -->
-                                <form action="{{ route('cartupdate', $cart->id) }}" method="POST">
-                                    @csrf
-                                    @method('PUT')
-                                    <input type="number" name="qty" value="{{ $cart->qty }}" min="1"
-                                        max="{{ $cart->product->qty }}" class="form-control" style="width: 80px;">
-                                    <button type="submit" class="btn btn-sm btn-dark mt-2">Update</button>
-                                </form>
-                            </td>
-                            <td>{{ $cart->product->price }}</td>
-                            <td>{{ $cart->qty * $cart->product->price }}</td>
-                            <td>{{ \Carbon\Carbon::parse($cart->created_at)->format('d M, Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($cart->updated_at)->format('d M, Y') }}</td>
-                            <td>
-                                <a href="#" onclick="deleteCategory({{ $cart->id }});"
-                                    class="btn btn-danger">Delete</a>
-                                <form id="delete-cart-from-{{ $cart->id }}"
-                                    action="{{ route('cartdestroy', $cart->id) }}" method="POST"
-                                    style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                @else
-                    <tr>
-                        <td colspan="6">No Product found.</td>
-                    </tr>
-                @endif
-            </table>
-            @if ($carts->isNotEmpty())
-                <!-- Display Total Quantity and Total Price -->
-                <p>Total Qty: {{ $totalQty }} | Total Price: ${{ number_format($totalPrice, 2) }}</p>
-                <form action="{{ route('cartcheckout') }}" method="POST">
-                    @csrf
-                    <button type="submit" class="btn btn-success w-100 mt-3">Checkout</button>
-                </form>
-            @endif
+        @endif
 
-
-
-
-
-            <!-- Pagination Links -->
-            <div class="d-flex justify-content-center">
+        <!-- Pagination -->
+        <div class="p-6">
+            <div class="flex justify-center">
                 {{ $carts->links('pagination::bootstrap-4') }}
             </div>
         </div>
@@ -90,9 +105,9 @@
 </div>
 
 <script>
-    function deleteCategory(id) {
+    function deleteCartItem(id) {
         if (confirm('Are you sure you want to delete this cart item?')) {
-            document.getElementById("delete-cart-from-" + id).submit();
+            document.getElementById('delete-cart-' + id).submit();
         }
     }
 </script>
