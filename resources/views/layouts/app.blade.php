@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <!-- Bootstrap CSS -->
@@ -13,83 +12,83 @@
 </head>
 
 <body class="bg-gray-50">
+
     <!-- Navbar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50 px-10">
-        <div class="container mx-auto px-4">
-            <div class="flex items-center justify-between py-4">
-                <!-- Logo -->
-                <a href="/" class="text-xl font-bold text-gray-800 flex items-center">
-                    <img src="{{ asset('Flexon_Logo.png') }}" alt="Logo" class="h-10 w-10 mr-2 rounded-full">
-                    Flexon Nepal
-                </a>
-                <!-- Menu -->
-                <div class="hidden md:flex space-x-6">
-                    <a href="/" class="text-gray-600 hover:text-blue-500 font-medium">Home</a>
-                    <a href="/allMedicines" class="text-gray-600 hover:text-blue-500 font-medium">Medicines</a>
-                    @if (Auth::check())
+    <nav class="bg-white shadow-md sticky top-0 z-50 px-6 py-4">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Logo -->
+            <a href="/" class="text-2xl font-semibold text-gray-800 flex items-center space-x-2 hover:text-indigo-600 transition duration-300">
+                <img src="{{ asset('2.png') }}" alt="Logo" class="h-10 rounded-full">
+                <span>Flexon Nepal</span>
+            </a>
 
-                        <a href="{{ route('cartproducts') }}" class="text-gray-600 hover:text-blue-500 font-medium">View Cart</a>
-                        <a href="{{ route('order.view') }}" class="text-gray-600 hover:text-blue-500 font-medium">View Order</a>
-                        <a href="{{ route('userprofile.edit') }}" class="text-gray-600 hover:text-blue-500 font-medium">Change Password</a>
-                        <a href="{{ route('account.logout') }}" class="text-gray-600 hover:text-blue-500 font-medium">Logout</a>
-                    @else
-                        <a href="{{ route('account.login') }}" class="text-gray-600 hover:text-blue-500 font-medium">Login</a>
-                        <a href="{{ route('account.register') }}" class="text-gray-600 hover:text-blue-500 font-medium">Register</a>
-                    @endif
-                    
-
-                </div>
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden text-gray-600 focus:outline-none" id="mobile-menu-button">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="/" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Home</a>
+                <a href="/allMedicines" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Medicines</a>
+                @if (Auth::check())
+                    <a href="{{ route('cartproducts') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">View Cart</a>
+                    <a href="{{ route('order.view') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">View Order</a>
+                    <a href="{{ route('userprofile.edit') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Change Password</a>
+                    <a href="{{ route('account.logout') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Logout</a>
+                @else
+                    <a href="{{ route('account.login') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Login</a>
+                    <a href="{{ route('account.register') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Register</a>
+                @endif
             </div>
-            <!-- Mobile Menu -->
-            <div class="hidden md:hidden" id="mobile-menu">
-                <div class="flex flex-col space-y-4 mt-2">
-                    <a href="/" class="text-gray-600 hover:text-blue-500 font-medium">Home</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Features</a>
-                    <a href="#" class="text-gray-600 hover:text-blue-500 font-medium">Pricing</a>
-                    @if (Auth::check())
-                        <a href="{{ route('account.logout') }}" class="text-gray-600 hover:text-blue-500 font-medium">Logout</a>
-                    @else
-                        <a href="{{ route('account.login') }}" class="text-gray-600 hover:text-blue-500 font-medium">Login</a>
-                    @endif
-                    <a href="{{ route('account.register') }}" class="text-gray-600 hover:text-blue-500 font-medium">Register</a>
-                </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-800 focus:outline-none" id="mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16m-7 6h7"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="flex flex-col space-y-6 mt-4 px-4">
+                <a href="/" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Home</a>
+                <a href="/allMedicines" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Medicines</a>
+                @if (Auth::check())
+                    <a href="{{ route('cartproducts') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">View Cart</a>
+                    <a href="{{ route('order.view') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">View Order</a>
+                    <a href="{{ route('userprofile.edit') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Change Password</a>
+                    <a href="{{ route('account.logout') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Logout</a>
+                @else
+                    <a href="{{ route('account.login') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Login</a>
+                    <a href="{{ route('account.register') }}" class="text-gray-800 text-lg hover:text-indigo-600 transition duration-300">Register</a>
+                @endif
             </div>
         </div>
     </nav>
-        
+
     @if (Session::has('success'))
         <div class="alert alert-success" id="successMessage">{{ Session::get('success') }}</div>
     @endif
     @if (Session::has('error'))
         <div class="alert alert-danger" id="errorMessage">{{ Session::get('error') }}</div>
     @endif
+
     <!-- Main Content -->
     <div class="container mx-auto py-10">
         @yield('content')
     </div>
-    
+
     <!-- Footer -->
-    <footer class="bg-indigo-800 text-white py-10 px-4">
+    <footer class="bg-gray-900 text-white py-10 px-4">
         <div class="flex flex-wrap justify-between gap-8">
             <!-- About Section -->
             <div class="flex-1 mb-6">
-                <h3 class="text-xl font-cursive mb-4">About MedicaCare</h3>
-                <p class="text-sm leading-relaxed text-indigo-200 mb-4">
-                    MedicaCare offers a comprehensive range of high-quality medical products and services, designed to improve health and well-being. We are committed to providing trusted, effective solutions for every stage of life, with a focus on quality, safety, and customer care.
+                <h3 class="text-xl font-semibold mb-4">About MedicaCare</h3>
+                <p class="text-sm leading-relaxed text-gray-400 mb-4">
+                    MedicaCare offers a comprehensive range of high-quality medical products and services, designed to improve health and well-being.
                 </p>
             </div>
-    
+
             <!-- Product Categories Section -->
             <div class="flex-1 mb-6">
-                <h3 class="text-xl font-cursive mb-4">Shop Medical Products</h3>
+                <h3 class="text-xl font-semibold mb-4">Shop Medical Products</h3>
                 <ul class="list-none p-0">
                     <li><a href="#" class="text-sm text-white hover:text-pink-500 transition">Health Supplements</a></li>
                     <li><a href="#" class="text-sm text-white hover:text-pink-500 transition">Wellness Products</a></li>
@@ -103,10 +102,10 @@
                     <a href="https://github.com/" class="text-white text-2xl hover:text-pink-500 transition"><i class="fab fa-github"></i></a>
                 </div>
             </div>
-    
+
             <!-- Customer Service Section -->
             <div class="flex-1 mb-6">
-                <h3 class="text-xl font-cursive mb-4">Shop With Confidence</h3>
+                <h3 class="text-xl font-semibold mb-4">Shop With Confidence</h3>
                 <ul class="list-none p-0">
                     <li><a href="#" class="text-sm text-white hover:text-pink-500 transition">Shipping Information</a></li>
                     <li><a href="#" class="text-sm text-white hover:text-pink-500 transition">Return Policy</a></li>
@@ -117,8 +116,6 @@
             </div>
         </div>
     </footer>
-    
-    
 
     <script>
         setTimeout(function() {
@@ -133,7 +130,7 @@
             }
         }, 5000);
     </script>
-    
+
     <!-- Script for Mobile Menu -->
     <script>
         const mobileMenuButton = document.getElementById("mobile-menu-button");
@@ -142,8 +139,7 @@
             mobileMenu.classList.toggle("hidden");
         });
     </script>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
