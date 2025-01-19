@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
@@ -28,6 +29,10 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
         Route::get('logout', [AdminLoginController::class, 'logout'])->name('admin.logout');
     });
+    
+    // Route for profile update
+    Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('profile/update', [AdminProfileController::class, 'update'])->name('profile.update');
 
     // Route for category
     Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
@@ -37,7 +42,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::put('/category/{category}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('/category/{category}', [CategoryController::class, 'destroy'])->name('category.destroy');
     
-
+    
     // Route for brand
     Route::get('/brand', [brandController::class, 'index'])->name('brand.index');
     Route::get('/brand/create', [brandController::class, 'create'])->name('brand.create');
@@ -61,14 +66,31 @@ Route::group(['prefix' => 'admin'], function () {
     });
 
     Route::get('/order', [OrderController::class, 'viewOrders'])->name('vieworders');
-
-    // Route for profile update
-    Route::get('profile/edit', [AdminProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('profile/update', [AdminProfileController::class, 'update'])->name('profile.update');
-    
 });
 
 Route::group(['prefix' => 'account'], function () {
+
+    //Authenticated Middleware
+    Route::group(['middleware' => 'auth'], function () {
+        Route::get('dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
+        Route::get('logout', [LoginController::class, 'logout'])->name('account.logout');
+        
+        // Route for profile update
+        Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('userprofile.edit');
+        Route::put('profile/update', [UserProfileController::class, 'update'])->name('userprofile.update');
+        
+        // Route for cart
+        Route::get('cart', [CartController::class, 'listcart'])->name('cartproducts');
+        Route::get('cart/{cart}', [CartController::class, 'addToCart'])->name('addtocart');
+        Route::put('/cart/{id}', [CartController::class, 'updatecardproducts'])->name('cartupdate');
+        Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cartdestroy');
+        
+        // Route for checkout
+        Route::post('/checkout', [OrderController::class, 'checkout'])->name('cartcheckout');
+        
+        // Route for order
+        Route::get('/order', [OrderController::class, 'UserOrders'])->name('order.view');
+    });
 
     //Guest Middleware
     Route::group(['middleware' => 'guest'], function () {
@@ -77,26 +99,7 @@ Route::group(['prefix' => 'account'], function () {
         Route::post('process-register', [LoginController::class, 'processRegister'])->name('account.processRegister');
         Route::post('authenticate', [LoginController::class, 'authenticate'])->name('account.authenticate');
     });
-
-
-    //Authenticated Middleware
-    Route::group(['middleware' => 'auth'], function () {
-        Route::get('dashboard', [DashboardController::class, 'index'])->name('account.dashboard');
-        Route::get('logout', [LoginController::class, 'logout'])->name('account.logout');
-        
-        Route::get('cart', [CartController::class, 'listcart'])->name('cartproducts');
-        Route::get('cart/{cart}', [CartController::class, 'addToCart'])->name('addtocart');
-        Route::put('/cart/{id}', [CartController::class, 'updatecardproducts'])->name('cartupdate');
-        Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cartdestroy');
-    
-        Route::post('/checkout', [OrderController::class, 'checkout'])->name('cartcheckout');
-
-        Route::get('/order', [OrderController::class, 'UserOrders'])->name('order.view');
-
-        Route::get('profile/edit', [UserProfileController::class, 'edit'])->name('userprofile.edit');
-        Route::put('profile/update', [UserProfileController::class, 'update'])->name('userprofile.update');
-
-
-
-    });
 });
+
+// Route::get('/sent-email',[MailController::class,'sendEmail']);
+

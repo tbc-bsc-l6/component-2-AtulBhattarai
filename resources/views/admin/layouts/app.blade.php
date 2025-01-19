@@ -53,7 +53,7 @@
 <body class="bg-gray-100">
     <!-- Sidebar -->
     <div class="sidebar bg-gray-800">
-        <h2 class="text-center text-white text-xl font-bold">EMeds</h2>
+        <h2 class="text-center text-white text-xl font-bold">Flexon Nepal</h2>
         <ul class="flex flex-col px-4">
             <li class="py-2">
                 <a class="block px-3 py-2 rounded hover:bg-gray-600" href="{{route('admin.dashboard')}}">Admin Dashboard</a>
