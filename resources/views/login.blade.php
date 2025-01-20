@@ -32,13 +32,13 @@
 
             <!-- Success/Error Alerts -->
             @if (Session::has('success'))
-                <div class="mb-4 p-3 bg-green-100 text-green-800 border border-green-300 rounded">
-                    {{ Session::get('success') }}
+                <div class="mb-4 p-4 bg-green-50 border-l-4 border-green-500 text-green-800 rounded-lg shadow-md">
+                    <i class="fas fa-check-circle mr-2"></i>{{ Session::get('success') }}
                 </div>
             @endif
             @if (Session::has('error'))
-                <div class="mb-4 p-3 bg-red-100 text-red-800 border border-red-300 rounded">
-                    {{ Session::get('error') }}
+                <div class="mb-4 p-4 bg-red-50 border-l-4 border-red-500 text-red-800 rounded-lg shadow-md">
+                    <i class="fas fa-exclamation-circle mr-2"></i>{{ Session::get('error') }}
                 </div>
             @endif
 
@@ -84,16 +84,6 @@
                     Don't have an account? <a href="{{ route('account.register') }}" class="text-blue-500 hover:underline">Create one now</a>
                 </p>
             </div>
-
-            <!-- Footer Links -->
-            <div class="mt-6">
-                <p class="text-center text-gray-500 mt-4">
-                    <a href="{{ route('admin.login') }}" class="text-blue-500 hover:underline">
-                        <i class="fas fa-user-shield"></i> Login As Admin
-                    </a>
-                </p>
-            </div>
-            
         </div>
     </div>
 </body>

@@ -32,13 +32,13 @@
 
             <!-- Success/Error Alerts -->
             @if (Session::has('success'))
-                <div class="mb-4 p-3 bg-green-100 text-green-800 border border-green-300 rounded">
-                    {{ Session::get('success') }}
+                <div class="mb-4 p-4 bg-green-100 text-green-800 border-l-4 border-green-500 rounded-lg shadow-md">
+                    <i class="fas fa-check-circle mr-2"></i>{{ Session::get('success') }}
                 </div>
             @endif
             @if (Session::has('error'))
-                <div class="mb-4 p-3 bg-red-100 text-red-800 border border-red-300 rounded">
-                    {{ Session::get('error') }}
+                <div class="mb-4 p-4 bg-red-100 text-red-800 border-l-4 border-red-500 rounded-lg shadow-md">
+                    <i class="fas fa-exclamation-circle mr-2"></i>{{ Session::get('error') }}
                 </div>
             @endif
 

@@ -13,8 +13,9 @@
             </h3>
         </div>
 
+
         <!-- Table Section -->
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto" id="orders-table">
             <table class="min-w-full table-auto border-collapse">
                 <thead class="bg-gray-200">
                     <tr>
@@ -54,6 +55,12 @@
                 </tbody>
             </table>
         </div>
+        <!-- Print Button -->
+        <div class="px-6 py-4 flex justify-end">
+            <button onclick="printOrders()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                Print Orders
+            </button>
+        </div>
 
         <!-- Pagination Section -->
         <div class="px-6 py-4 bg-gray-50 rounded-b-lg">
@@ -63,4 +70,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function printOrders() {
+        var printContents = document.getElementById('orders-table').innerHTML;
+        var originalContents = document.body.innerHTML;
+        
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
 @endsection

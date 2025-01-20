@@ -32,7 +32,7 @@ class LoginController extends Controller
                     return redirect()->route('admin.dashboard');
                 }
                 else{
-                    return redirect()-> route('admin.login') -> with('error','Either email or password doesnot match.');
+                    return redirect()-> route('admin.login') -> with('error','Oops! It looks like your email or password isn’t quite right.');
                 }
     
             }

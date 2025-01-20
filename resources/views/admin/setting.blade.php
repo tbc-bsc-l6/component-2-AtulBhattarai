@@ -29,7 +29,7 @@
                             @enderror
                         </div>
 
-                        <!-- Email -->
+                        <!-- Email (Disabled) -->
                         <div class="relative">
                             <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                             <div class="flex items-center border-b-2 border-gray-300 mt-2">
@@ -38,9 +38,6 @@
                                     class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm text-gray-900" 
                                     placeholder="Enter your email" disabled required>
                             </div>
-                            @error('email')
-                                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
-                            @enderror
                         </div>
 
                         <!-- Current Password -->
@@ -50,7 +47,7 @@
                                 <i class="fas fa-lock text-gray-500 mr-3"></i>
                                 <input type="password" id="current_password" name="current_password" 
                                     class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('current_password') border-red-500 @enderror text-gray-900" 
-                                    placeholder="Enter current password">
+                                    placeholder="Enter current password" required>
                             </div>
                             @error('current_password')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
@@ -59,28 +56,28 @@
 
                         <!-- New Password -->
                         <div class="relative">
-                            <label for="new_password" class="block text-sm font-medium text-gray-700">New Password</label>
+                            <label for="password" class="block text-sm font-medium text-gray-700">New Password</label>
                             <div class="flex items-center border-b-2 border-gray-300 mt-2">
                                 <i class="fas fa-lock text-gray-500 mr-3"></i>
-                                <input type="password" id="new_password" name="new_password" 
-                                    class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('new_password') border-red-500 @enderror text-gray-900" 
+                                <input type="password" id="password" name="password" 
+                                    class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('password') border-red-500 @enderror text-gray-900" 
                                     placeholder="Enter new password">
                             </div>
-                            @error('new_password')
+                            @error('password')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                             @enderror
                         </div>
 
                         <!-- Confirm New Password -->
                         <div class="relative">
-                            <label for="new_password_confirmation" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
+                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
                             <div class="flex items-center border-b-2 border-gray-300 mt-2">
                                 <i class="fas fa-lock text-gray-500 mr-3"></i>
-                                <input type="password" id="new_password_confirmation" name="new_password_confirmation" 
-                                    class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('new_password_confirmation') border-red-500 @enderror text-gray-900" 
+                                <input type="password" id="password_confirmation" name="password_confirmation" 
+                                    class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm @error('password_confirmation') border-red-500 @enderror text-gray-900" 
                                     placeholder="Confirm new password">
                             </div>
-                            @error('new_password_confirmation')
+                            @error('password_confirmation')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
                             @enderror
                         </div>

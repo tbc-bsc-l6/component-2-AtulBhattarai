@@ -30,7 +30,7 @@ class LoginController extends Controller
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 return redirect()->route('home');
             } else {
-                return redirect()->route('account.login')->with('error', 'Either email or password does not match.');
+                return redirect()->route('account.login')->with('error', 'Oops! It looks like your email or password isn’t quite right.');
             }
         } else {
             return redirect()->route('account.login')
@@ -64,7 +64,7 @@ class LoginController extends Controller
             // Call the method to send the welcome email
             $this->sendWelcomeEmail($user);
 
-            return redirect()->route('account.login')->with('success', 'Account Register Successful.');
+            return redirect()->route('account.login')->with('success', 'Awesome! Your account has been successfully created. Get ready to explore!');
         } else {
             return redirect()->route('account.register')
                 ->withInput()

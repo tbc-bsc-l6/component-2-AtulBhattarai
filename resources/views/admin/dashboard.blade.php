@@ -39,20 +39,6 @@
                 <i class="fas fa-check-circle fa-5x text-success"></i>
             </div>
 
-            <!-- Graph/Chart Section -->
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card shadow-lg rounded-4">
-                        <div class="card-header bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-t-lg">
-                            <h4 class="mb-0"><i class="fas fa-chart-line me-2"></i> Sales Overview</h4>
-                        </div>
-                        <div class="card-body">
-                            <p class="text-center">This section can contain your data visualization charts, such as sales over time, user engagement, etc.</p>
-                            <!-- You can add a chart here using Chart.js or other libraries -->
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

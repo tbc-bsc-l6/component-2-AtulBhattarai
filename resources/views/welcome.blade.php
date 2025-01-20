@@ -2,6 +2,20 @@
 
 @section('content')
 <div class="container mx-auto px-4">
+    <!-- Image Slider Section -->
+    <div class="relative mb-8">
+        <div class="carousel-container overflow-hidden rounded-xl shadow-xl">
+            <div class="carousel relative w-full h-96 sm:h-[500px] md:h-[550px]">
+                <div class="carousel-slide flex transition-all duration-700 ease-in-out">
+                    <img src="{{ asset('images/slider1.jpg') }}" alt="Slider 1" class="w-full h-full object-cover object-center rounded-xl">
+                    <img src="{{ asset('images/slider2.jpg') }}" alt="Slider 2" class="w-full h-full object-cover object-center rounded-xl">
+                    <img src="{{ asset('images/slider3.jpg') }}" alt="Slider 3" class="w-full h-full object-cover object-center rounded-xl">
+                </div>
+            </div>
+            <!-- Removed Carousel Controls (Prev & Next buttons) -->
+        </div>
+    </div>
+
     <!-- Featured Medicines Section -->
     <div class="feature my-5">
         <h2 class="text-3xl font-semibold text-indigo-700 mb-8 text-center">Featured Medicines</h2>
@@ -68,4 +82,21 @@
         </div>
     </div>
 </div>
+
+<!-- Carousel JS -->
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide img');
+    const totalSlides = slides.length;
+
+    function moveSlide(direction) {
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        document.querySelector('.carousel-slide').style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+
+    // Auto slide feature
+    setInterval(() => {
+        moveSlide(1);
+    }, 5000); // Change slide every 5 seconds
+</script>
 @endsection

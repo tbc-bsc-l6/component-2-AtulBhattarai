@@ -24,8 +24,9 @@ class AdminProfileController extends Controller
 
         // Validation rules
         $rules = [
-            'current_password' => 'required',
-            'password' => 'required|min:5|confirmed',
+            'name' => 'required|string|max:255',  // Allow name to be updated
+            'current_password' => 'required',  // Ensure current password is provided
+            'password' => 'nullable|min:5|confirmed',  // New password is optional
         ];
 
         // Validate the input
@@ -46,12 +47,19 @@ class AdminProfileController extends Controller
                 ->withInput();
         }
 
-        // Update the password
-        $user->password = Hash::make($request->password);
+        // Update the name
+        $user->name = $request->name;
+
+        // Only update the password if the new one is provided
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+
+        // Save the user
         $user->save();
 
         return redirect()
             ->route('admin.dashboard')
-            ->with('success', 'Password updated successfully.');
+            ->with('success', 'Profile updated successfully.');
     }
 }

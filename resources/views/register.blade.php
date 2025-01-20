@@ -40,7 +40,10 @@
                         class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none @error('name') border-red-500 @enderror"
                         placeholder="Your Name">
                     @error('name')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        <div class="mt-2 flex items-center bg-red-50 border-l-4 border-red-600 p-2 rounded-lg shadow-xl">
+                            <i class="fas fa-exclamation-circle text-red-600 mr-2"></i>
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        </div>
                     @enderror
                 </div>
 
@@ -51,7 +54,10 @@
                         class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none @error('email') border-red-500 @enderror"
                         placeholder="name@example.com">
                     @error('email')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        <div class="mt-2 flex items-center bg-red-50 border-l-4 border-red-600 p-2 rounded-lg shadow-xl">
+                            <i class="fas fa-exclamation-circle text-red-600 mr-2"></i>
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        </div>
                     @enderror
                 </div>
 
@@ -62,7 +68,10 @@
                         class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none @error('password') border-red-500 @enderror"
                         placeholder="Password">
                     @error('password')
-                        <p class="text-sm text-red-500 mt-1">{{ $message }}</p>
+                        <div class="mt-2 flex items-center bg-red-50 border-l-4 border-red-600 p-2 rounded-lg shadow-xl">
+                            <i class="fas fa-exclamation-circle text-red-600 mr-2"></i>
+                            <p class="text-sm text-red-600">{{ $message }}</p>
+                        </div>
                     @enderror
                 </div>
 
@@ -70,8 +79,7 @@
                 <div>
                     <label for="confirm_password" class="block text-sm font-medium text-gray-600">Confirm Password</label>
                     <input type="password" name="password_confirmation" id="confirm_password"
-                        class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none"
-                        placeholder="Confirm Password">
+                        class="w-full px-4 py-2 mt-1 border rounded-lg shadow-sm focus:ring-2 focus:ring-blue-400 focus:outline-none">
                 </div>
 
                 <!-- Submit Button -->

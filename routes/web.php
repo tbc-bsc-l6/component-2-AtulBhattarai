@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\MedicineController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaypalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductSearchController;
 use App\Http\Controllers\UserProfileController;
@@ -101,5 +102,11 @@ Route::group(['prefix' => 'account'], function () {
     });
 });
 
-// Route::get('/sent-email',[MailController::class,'sendEmail']);
+route::get('createpaypal',[PaypalController::class,'createpaypal'])->name('createpaypal');
+
+route::post('processPaypal',[PaypalController::class,'processPaypal'])->name('processPaypal');
+
+route::get('processSuccess',[PaypalController::class,'processSuccess'])->name('processSuccess');
+
+route::get('processCancel',[PaypalController::class,'processCancel'])->name('processCancel');
 

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Flexon - Update Password')
+@section('title', 'Flexon - Update Profile')
 
 @section('content')
 <div class="container mx-auto px-6 py-12">
@@ -10,7 +10,7 @@
             <div class="bg-gradient-to-r from-purple-500 to-indigo-500 text-white rounded-lg shadow-lg">
                 <!-- Header -->
                 <div class="bg-transparent text-3xl font-semibold py-6 px-8">
-                    <i class="fas fa-key mr-3"></i> Update Password
+                    <i class="fas fa-user-edit mr-3"></i> Update Profile
                 </div>
 
                 <!-- Form Section -->
@@ -18,6 +18,20 @@
                     <form action="{{ route('userprofile.update') }}" method="POST" class="space-y-6">
                         @csrf
                         @method('PUT')
+
+                        <!-- Name -->
+                        <div class="relative">
+                            <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                            <div class="flex items-center border-b-2 border-gray-300 mt-2">
+                                <i class="fas fa-user text-gray-500 mr-3"></i>
+                                <input type="text" id="name" name="name" value="{{ old('name', $user->name) }}"
+                                    class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 sm:text-sm @error('name') border-red-500 @enderror text-gray-900"
+                                    placeholder="Enter your name" required>
+                            </div>
+                            @error('name')
+                                <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
+                            @enderror
+                        </div>
 
                         <!-- Current Password -->
                         <div class="relative">
@@ -40,7 +54,7 @@
                                 <i class="fas fa-lock text-gray-500 mr-3"></i>
                                 <input type="password" id="password" name="password"
                                     class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 sm:text-sm @error('password') border-red-500 @enderror text-gray-900"
-                                    placeholder="Enter your new password" required>
+                                    placeholder="Enter your new password">
                             </div>
                             @error('password')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
@@ -54,7 +68,7 @@
                                 <i class="fas fa-lock text-gray-500 mr-3"></i>
                                 <input type="password" id="password_confirmation" name="password_confirmation"
                                     class="w-full py-3 pl-12 pr-3 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-purple-500 sm:text-sm @error('password_confirmation') border-red-500 @enderror text-gray-900"
-                                    placeholder="Confirm your new password" required>
+                                    placeholder="Confirm your new password">
                             </div>
                             @error('password_confirmation')
                                 <p class="text-sm text-red-600 mt-1">{{ $message }}</p>
@@ -65,7 +79,7 @@
                         <div>
                             <button type="submit"
                                 class="w-full py-3 bg-purple-600 text-white rounded-md shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition duration-200">
-                                <i class="fas fa-save mr-2"></i> Update Password
+                                <i class="fas fa-save mr-2"></i> Update Profile
                             </button>
                         </div>
                     </form>
